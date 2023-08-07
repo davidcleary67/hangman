@@ -143,65 +143,79 @@ def main():
     words = loadWords()
     word = selectWord(words)
   
-    # Initialise game variables.
-    guesses = []
-    guessCount = 0 
-    youWon = False
-    
     # Display the game name.
     displayHeader()
     
-    # Main loop.
-    # Whilst game is not over, repeatedly display gallows, guesses and progress
-    # towards guessing the word.
-    # exit the main loop when either all letters in the word have been guessed
-    # or the maximum number of incorrectly guesses, eight, has occurred. 
+    # New game loop.
+    # Play the hangman game.  When the game finishes give the player the 
+    # opportunity to play again.
     while True:
         
-        # Display game information.
-        displayGallows(guessCount)
-        displayGuesses(guesses)
-        foundCount = displayWord(word, guesses)
-        
-        # The player has won. All the letters in the word have been guessed.
-        # Exit the main loop.
-        if foundCount == len(word):
-            youWon = True
-            break
-       
-        # Input validation loop. 
-        # Loop until the player enters a valid guess.
-        # A valid guess is a single letter that has not been guessed previously.
+        # Initialise game variables.
+        guesses = []
+        guessCount = 0 
+        youWon = False
+    
+        # Game loop.
+        # Whilst game is not over, repeatedly display gallows, guesses and 
+        # progress towards guessing the word.
+        # Exit the main loop when either all letters in the word have been
+        # guessed or the maximum number of incorrectly guesses, eight, has
+        # occurred. 
         while True:
             
-            # Get the player's guess.
-            guess = input("Guess: ").upper()
+            # Display game information.
+            displayGallows(guessCount)
+            displayGuesses(guesses)
+            foundCount = displayWord(word, guesses)
             
-            # Guesses must be single letters.
-            if len(guess) != 1 or not guess.isalpha():
-                print("Invalid guess.  Guesses must be a single letter.")
-                
-            # Guesses must not have been guessed previously.
-            elif guess in guesses:
-                print("Invalid guess.  Letter already used.")
-            else:
-                break
-       
-        # Appened the current guess to the list of all guesses.
-        guesses.append(guess)
-        
-        # Incrmement the number of guesses. 
-        if not guess in word:
-            guessCount += 1
-            
-            # The player has lost.  The maximum number of incorrect guesses
-            # has been reached.
+            # The player has won. All the letters in the word have been guessed.
             # Exit the main loop.
-            if guessCount == MAXGUESSES:
+            if foundCount == len(word):
+                youWon = True
                 break
-
-    # Display whether the player has won or lost.
-    print("Well done, you won!" if youWon else ("Sorry, you lost!  The word was " + word))
+           
+            # Input validation loop. 
+            # Loop until the player enters a valid guess.
+            # A valid guess is a single letter that has not been guessed 
+            # previously.
+            while True:
+                
+                # Get the player's guess.
+                guess = input("Guess: ").upper()
+                
+                # Guesses must be single letters.
+                if len(guess) != 1 or not guess.isalpha():
+                    print("Invalid guess.  Guesses must be a single letter.")
+                    
+                # Guesses must not have been guessed previously.
+                elif guess in guesses:
+                    print("Invalid guess.  Letter already used.")
+                else:
+                    break
+           
+            # Appened the current guess to the list of all guesses.
+            guesses.append(guess)
+            
+            # Incrmement the number of guesses. 
+            if not guess in word:
+                guessCount += 1
+                
+                # The player has lost.  The maximum number of incorrect guesses
+                # has been reached.
+                # Exit the main loop.
+                if guessCount == MAXGUESSES:
+                    break
+    
+        # Display whether the player has won or lost.
+        print("Well done, you won!" if youWon else ("Sorry, you lost!  The word was " + word))
+        
+        # Ask the player whether they want to play another game.
+        playAgain = input("\nDo you want to play again (Y/N)? ").upper()
+        if playAgain != "Y":
+            break
+        
+    print("\nGoodbye!") 
     
 ## Call the main function.  
 if __name__ == "__main__":
