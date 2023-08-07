@@ -33,6 +33,8 @@ GALLOWSCOUNT = 9 # Number of gallows elements.
 
 WORDFILE = "nouns.txt" # Text file of words to guess.
 
+MAXGUESSES = 8 # Maximum number of guesses.
+
 ## Functions
 
 def displayHeader():
@@ -195,7 +197,7 @@ def main():
             # The player has lost.  The maximum number of incorrect guesses
             # has been reached.
             # Exit the main loop.
-            if guessCount == 8:
+            if guessCount == MAXGUESSES:
                 break
 
     # Display whether the player has won or lost.
