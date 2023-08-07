@@ -144,7 +144,6 @@ def main():
     # Initialise game variables.
     guesses = []
     guessCount = 0 
-    gameOver = False
     youWon = False
     
     # Display the game name.
@@ -155,7 +154,7 @@ def main():
     # towards guessing the word.
     # exit the main loop when either all letters in the word have been guessed
     # or the maximum number of incorrectly guesses, eight, has occurred. 
-    while not gameOver:
+    while True:
         
         # Display game information.
         displayGallows(guessCount)
@@ -168,7 +167,7 @@ def main():
             youWon = True
             break
        
-        # Input loop. 
+        # Input validation loop. 
         # Loop until the player enters a valid guess.
         # A valid guess is a single letter that has not been guessed previously.
         while True:
@@ -197,7 +196,7 @@ def main():
             # has been reached.
             # Exit the main loop.
             if guessCount == 8:
-                gameOver = True
+                break
 
     # Display whether the player has won or lost.
     print("Well done, you won!" if youWon else ("Sorry, you lost!  The word was " + word))
