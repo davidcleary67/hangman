@@ -13,14 +13,14 @@ Licencing: Copyright 2023 SuniTAFE. All rights reserved.
 from os import system, name
 import random
 
-## Global variables
+## Global variables and constants
 
 """
 Gallows elements for printing.
 "f" --> gallows frame, always displayed
 "p" --> hangman person, to be displayed as wrong guesses are made
 """
-gallows = [{"f":"   ","p":"_________"},   # Gallows elements for printing.
+GALLOWS = [{"f":"   ","p":"_________"},   # Gallows elements for printing.
            {"f":"  |         ","p":"|"},  # "f" --> gallows frame, always
            {"f":"  |        ","p":" O"},  #         displayed
            {"f":"  |        ","p":" |"},  # "p" --> hangman person, to be
@@ -56,7 +56,7 @@ def displayGallows(count):
         # Print a gallows frame element.
         # Optionally print a person element based upon the number of incorrect 
         # guesses.
-        print(gallows[c]["f"] + (gallows[c]["p"] if c < count else ""))
+        print(GALLOWS[c]["f"] + (GALLOWS[c]["p"] if c < count else ""))
     
 def displayGuesses(guesses):
     """
