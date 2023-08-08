@@ -139,9 +139,8 @@ def main():
     then the player wins and "Well done, you won!" is displayed, otherwise,
     the player lost and "Sorry, you lost!" is displayed.
     """
-    # Load the list of words from a file and randomly select one word.
+    # Load the list of words from a file. 
     words = loadWords()
-    word = selectWord(words)
   
     # Display the game name.
     displayHeader()
@@ -155,6 +154,9 @@ def main():
         guesses = []
         guessCount = 0 
         youWon = False
+        
+        # Randomly select a word.
+        word = selectWord(words)
     
         # Game loop.
         # Whilst game is not over, repeatedly display gallows, guesses and 
