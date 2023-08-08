@@ -10,6 +10,7 @@ Licencing: Copyright 2023 SuniTAFE. All rights reserved.
 
 ## Imports
 
+from os import system, name
 import random
 
 ## Global variables
@@ -122,6 +123,18 @@ def selectWord(words):
     word = words[index].upper().rstrip("\n")
     return word
     
+def clearScreen():
+    """
+    Clear the screen.
+    """
+    # For windows.
+    if name == 'nt':
+        system('cls')
+ 
+    # For everything else.
+    else:
+        system('clear')
+        
 def main():
     """
     Main function.
@@ -142,9 +155,6 @@ def main():
     # Load the list of words from a file. 
     words = loadWords()
   
-    # Display the game name.
-    displayHeader()
-    
     # New game loop.
     # Play the hangman game.  When the game finishes give the player the 
     # opportunity to play again.
@@ -167,6 +177,8 @@ def main():
         while True:
             
             # Display game information.
+            clearScreen()
+            displayHeader()
             displayGallows(guessCount)
             displayGuesses(guesses)
             foundCount = displayWord(word, guesses)
@@ -198,8 +210,9 @@ def main():
            
             # Appened the current guess to the list of all guesses.
             guesses.append(guess)
+            guesses.sort()
             
-            # Incrmement the number of guesses. 
+            # Increment the number of guesses. 
             if not guess in word:
                 guessCount += 1
                 
