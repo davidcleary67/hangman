@@ -6,6 +6,7 @@ Version:   1.0
 Date:      7 Aug 2023
 Author:    David Cleary
 Licencing: Copyright 2023 SuniTAFE. All rights reserved.
+Platforms: AWS-Linux, Windows 11
 """
 
 ## Imports
